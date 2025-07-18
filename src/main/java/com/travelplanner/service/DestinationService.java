@@ -4,6 +4,8 @@ import com.travelplanner.entity.Destination;
 import com.travelplanner.exception.ResourceNotFoundException;
 import com.travelplanner.repository.DestinationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +18,25 @@ public class DestinationService {
 
     public List<Destination> getAllDestinations(){
         return destinationRepository.findAll();
+    }
+
+    /**
+     * Retrieves all destinations with pagination.
+     * @param pageRequest the pagination information.
+     * @return a paginated list of destinations.
+     */
+    public Page<Destination> getAllDestinations(PageRequest pageRequest){
+        return destinationRepository.findAll(pageRequest);
+    }
+
+    /**
+     * Retrieves destinations by name with pagination.
+     * @param name the name to search for.
+     * @param pageRequest the pagination information.
+     * @return a paginated list of destinations matching the search criteria.
+     */
+    public Page<Destination> getDestinationsByName(String name, PageRequest pageRequest){
+        return destinationRepository.findByNameContaining(name, pageRequest);
     }
 
     public Destination saveDestination(Destination destination){
