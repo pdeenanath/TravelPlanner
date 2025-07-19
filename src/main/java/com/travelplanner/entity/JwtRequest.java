@@ -1,26 +1,20 @@
 package com.travelplanner.entity;
 
-import jakarta.persistence.*;
+import java.io.Serializable;
 
-@Entity
-@Table(name = "users")
-public class User {
+public class JwtRequest implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private static final long serialVersionUID = 1475154530416060623L;
 
-    @Column(nullable = false, unique = true)
     private String username;
-    @Column(nullable = false)
     private String password;
 
-    public Long getId() {
-        return id;
+    public JwtRequest() {
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public JwtRequest(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
 
     public String getUsername() {
